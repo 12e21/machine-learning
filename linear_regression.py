@@ -1,5 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
+'''
+本程序为一个线性回归实例
+'''
 
 # 正向预测函数
 def hypothetical(theta_0:float,theta_1:float,x:np.ndarray)->np.ndarray:
@@ -22,7 +25,7 @@ def cal_theta_1_gradient(theta_0:float,theta_1:float,train_x:np.ndarray,train_y:
     predict_x=hypothetical(theta_0,theta_1,train_x)
     #中间计算
     middle=np.dot((predict_x-train_y),train_x)
-    return np.sum(middle)/train_x.size
+    return middle/train_x.size
 
 # 更新参数
 def update_param(theta:float,gradient:float,learning_rate:float):
@@ -69,7 +72,7 @@ if __name__=="__main__":
 
         iter_counter+=1
 
-    print("最终拟合结果:theta0:{} ,theta1{}",theta_0,theta_1)
+    print(f"最终拟合结果 theta0:{theta_0} ,theta1: {theta_1}")
 
 
 
