@@ -14,6 +14,14 @@ def standardize_vector(x:np.ndarray)->np.ndarray:
     return result
 
 '''
+标准化一个特征矩阵中的所有特征向量
+'''
+def standardize_matrix(x:np.ndarray)->np.ndarray:
+    for fearture_index in range(x.shape[1]):
+        x[:,fearture_index]=standardize_vector(x[:,fearture_index])
+    return x
+
+'''
 归一化一个特征向量
 '''
 def normalize_vector(x:np.ndarray)->np.ndarray:
@@ -21,6 +29,14 @@ def normalize_vector(x:np.ndarray)->np.ndarray:
     min=x.min()
     result=(x-min)/(max-min)
     return result
+
+'''
+归一化一个特征矩阵中的所有特征向量
+'''
+def normalize_matrix(x:np.ndarray)->np.ndarray:
+    for fearture_index in range(x.shape[1]):
+        x[:,fearture_index]=normalize_vector(x[:,fearture_index])
+    return x
 
 
 '''
@@ -38,13 +54,15 @@ def reflect_to_high_dim(x:np.ndarray,column_index:int,high_dim_num:int)->np.ndar
 
 
 if __name__ == "__main__":
-    #test_arr=np.array([1234,5673,8765])
-    #print(standardize_vector(test_arr))
-    #print(normalize_vector(test_arr))
+    # test_arr=np.array([1234,5673,8765])
+    # print(standardize_vector(test_arr))
+    # print(normalize_vector(test_arr))
     test_matrix=np.array([
-        [1,100,1000],
-        [2,200,2000],
-        [3,300,3000]
+        [1.,100.,1000.],
+        [2.,200.,2000.],
+        [3.,300.,3000.]
     ])
-    print(reflect_to_high_dim(test_matrix,0,2))
-    print(test_matrix)
+    # print(reflect_to_high_dim(test_matrix,0,2))
+    # print(test_matrix)
+    print(normalize_matrix(test_matrix))
+    print(standardize_matrix(test_matrix))
