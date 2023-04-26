@@ -5,10 +5,14 @@ import matplotlib.pyplot as plt
 本程序为一个多元线性回归实例(梯度下降法)
 '''
 
-'''
-预测函数(输入参数向量和特征矩阵,返回结果的向量)
-'''
 def hypothetical(theta:np.ndarray,x:np.ndarray)->np.ndarray:
+    '''
+    预测函数
+    
+    theta: 参数向量
+    x: 特征矩阵
+    y: 标签向量
+    '''
     y=np.dot(x,theta.T)
     return y
 
@@ -55,7 +59,7 @@ if __name__ == "__main__":
     learning_rate=0.0000001
 
     #开始迭代直至到达最大循环次数或收敛
-    while not(iter_counter==1000000 or abs(loss-pre_loss) < 0.0000000001):
+    while not(iter_counter==1000000 or abs(loss-pre_loss) < 0.0000001):
         # 计算梯度
         gradients=cal_gradient(theta,x,y)
 
@@ -69,5 +73,5 @@ if __name__ == "__main__":
         # 打印误差
         print(loss)
 
+    print(theta)
     
-

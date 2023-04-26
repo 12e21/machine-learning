@@ -85,3 +85,5 @@ if __name__ == "__main__":
         
         # 打印误差
         print(loss)
+    
+    print(theta)
