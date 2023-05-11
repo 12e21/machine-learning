@@ -15,8 +15,11 @@ design_matrix[:,0]=axis1
 design_matrix[:,1]=axis2
 design_matrix[:,2]=results
 print(design_matrix)
+np.savetxt("point_matrix.txt",design_matrix)
 
 plt.figure()
 plt.scatter(design_matrix[:,0][np.where(results==1)],design_matrix[:,1][np.where(results==1)],c="red")
 plt.scatter(design_matrix[:,0][np.where(results==0)],design_matrix[:,1][np.where(results==0)],c="blue")
 plt.show()
+
+

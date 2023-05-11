@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib as plt
 import utils
 '''
-本程序为
+本程序为单一元逻辑回归
 '''
 
 
