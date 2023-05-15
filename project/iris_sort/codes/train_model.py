@@ -36,11 +36,11 @@ sub_model2=learn.Logistic_regression(feature,label2,params_2)
 sub_model3=learn.Logistic_regression(feature,label3,params_3)
 
 # 模型迭代
-sub_model1.iterate(0.0003,10000)
+sub_model1.iterate(0.0003,10000,1.0)
 print("sub model 1 finished !")
-sub_model2.iterate(0.0003,10000)
+sub_model2.iterate(0.0003,10000,1.0)
 print("sub model 2 finished !")
-sub_model3.iterate(0.0003,10000)
+sub_model3.iterate(0.0003,10000,1.0)
 print("sub model 3 finished !")
 
 # 获取参数

@@ -65,7 +65,14 @@ class Logistic_regression(BaseLearning):
         middle=np.dot(self._featureMmatrix.T,diff)
         return middle/self._featureMmatrix.shape[0]
     
-    def iterate(self, learningRate: float, maxIterCount: int):
+    def _cal_regular_item(self,regularRate:float):
+        '''
+        计算正则项
+        regularRate : 正则率
+        '''
+        return (regularRate/self._featureMmatrix.shape[0])*2*self._paramsVector
+
+    def iterate(self, learningRate: float, maxIterCount: int,regularRate:float):
         #设置迭代次数计数器,误差,学习率
         iter_counter=0
         loss=3
@@ -76,9 +83,12 @@ class Logistic_regression(BaseLearning):
         while not(iter_counter==maxIterCount or abs(loss-pre_loss) < 0.0000003):
             # 计算梯度
             gradients=self._cal_gradient()
+            
+            # 计算正则项
+            regularItem=self._cal_regular_item(regularRate)
 
             # 更新梯度
-            self._paramsVector=self._paramsVector-learning_rate*gradients
+            self._paramsVector=self._paramsVector-learning_rate*(gradients+regularItem)
 
             # 计算误差
             pre_loss=loss
