@@ -70,7 +70,7 @@ class Logistic_regression(BaseLearning):
         计算正则项
         regularRate : 正则率
         '''
-        return (regularRate/self._featureMmatrix.shape[0])*2*self._paramsVector
+        return (regularRate/self._featureMmatrix.shape[0])*self._paramsVector
 
     def iterate(self, learningRate: float, maxIterCount: int,regularRate:float):
         #设置迭代次数计数器,误差,学习率

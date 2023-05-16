@@ -155,7 +155,7 @@ R(\theta) = \sum_{i} \theta_i^2
 $$
 - 对于逻辑回归进行正则化后，参数$\theta$的更新公式变为
 $$
-\theta_j := \theta_j - \alpha \left( \frac{1}{m} \sum_{i=1}^m (h_{\theta}(x^{(i)}) - y^{(i)}) x_j^{(i)} - \frac{\lambda}{m} g(\theta_j) \right)
+\theta_j := \theta_j - \alpha \left( \frac{1}{m} \sum_{i=1}^m (h_{\theta}(x^{(i)}) - y^{(i)}) x_j^{(i)} + \frac{\lambda}{m} g(\theta_j) \right)
 $$
 其中，$\alpha$表示学习率（learning rate），$x_j^{(i)}$表示第$i$个样本的第$j$个输入变量，$g(\theta_j)$表示正则化函数对参数$\theta_j$的导数（derivative）。
 - 如果使用L1正则化，那么$g(\theta_j)$为
