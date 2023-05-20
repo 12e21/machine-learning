@@ -23,32 +23,12 @@ a=list(range(layer_count+1))
 
 a[0]=feature.T
 
-# 添加bias
-layer[0]=np.concatenate((a[0],np.ones([1,a[0].shape[1]])),axis=0)
-# 通过权重
-z[0]=np.dot(params[0],layer[0])
-# 进入激活函数
-a[1]=sigmoid(z[0])
-
-# 添加bias
-layer[1]=np.concatenate((a[1],np.ones([1,a[1].shape[1]])),axis=0)
-# 通过权重
-z[1]=np.dot(params[1],layer[1])
-# 进入激活函数
-a[2]=sigmoid(z[1])
-
-# 添加bias
-layer[2]=np.concatenate((a[2],np.ones([1,a[2].shape[1]])),axis=0)
-# 通过权重
-z[2]=np.dot(params[2],layer[2])
-# 进入激活函数
-a[3]=sigmoid(z[2])
-
-# 添加bias
-layer[3]=np.concatenate((a[3],np.ones([1,a[3].shape[1]])),axis=0)
-# 通过权重
-z[3]=np.dot(params[3],layer[3])
-# 进入激活函数
-a[4]=sigmoid(z[3])
+for i in range(0,layer_count):
+    # 添加bias
+    layer[i]=np.concatenate((a[i],np.ones([1,a[i].shape[1]])),axis=0)
+    # 通过权重
+    z[i]=np.dot(params[i],layer[i])
+    # 进入激活函数
+    a[i+1]=sigmoid(z[i])
 
 print(a[4])
