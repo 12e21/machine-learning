@@ -15,32 +15,40 @@ params=[np.zeros([4,3]),np.zeros([4,5]),np.zeros([3,5]),np.zeros([1,4])]
 def sigmoid(x:np.ndarray):
     return 1/(1+np.exp(x))
 
-# 添加bias
-layer0=np.concatenate((feature.T,np.ones([1,feature.T.shape[1]])),axis=0)
-# 通过权重
-z_0=np.dot(params[0],layer0)
-# 进入激活函数
-a_1=sigmoid(z_0)
+# 设置layer,z,a
+layer_count=4
+layer=list(range(layer_count))
+z=list(range(layer_count))
+a=list(range(layer_count+1))
+
+a[0]=feature.T
 
 # 添加bias
-layer1=np.concatenate((a_1,np.ones([1,a_1.shape[1]])),axis=0)
+layer[0]=np.concatenate((a[0],np.ones([1,a[0].shape[1]])),axis=0)
 # 通过权重
-z_1=np.dot(params[1],layer1)
+z[0]=np.dot(params[0],layer[0])
 # 进入激活函数
-a_2=sigmoid(z_1)
+a[1]=sigmoid(z[0])
 
 # 添加bias
-layer2=np.concatenate((a_2,np.ones([1,a_2.shape[1]])),axis=0)
+layer[1]=np.concatenate((a[1],np.ones([1,a[1].shape[1]])),axis=0)
 # 通过权重
-z_2=np.dot(params[2],layer2)
+z[1]=np.dot(params[1],layer[1])
 # 进入激活函数
-a_3=sigmoid(z_2)
+a[2]=sigmoid(z[1])
 
 # 添加bias
-layer3=np.concatenate((a_3,np.ones([1,a_3.shape[1]])),axis=0)
+layer[2]=np.concatenate((a[2],np.ones([1,a[2].shape[1]])),axis=0)
 # 通过权重
-z_3=np.dot(params[3],layer3)
+z[2]=np.dot(params[2],layer[2])
 # 进入激活函数
-a_4=sigmoid(z_3)
+a[3]=sigmoid(z[2])
 
-print(a_4)
+# 添加bias
+layer[3]=np.concatenate((a[3],np.ones([1,a[3].shape[1]])),axis=0)
+# 通过权重
+z[3]=np.dot(params[3],layer[3])
+# 进入激活函数
+a[4]=sigmoid(z[3])
+
+print(a[4])
