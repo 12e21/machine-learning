@@ -1,5 +1,6 @@
 import numpy as np
 
+
 # 设置特征矩阵和标签(OR关系)
 feature=np.array([
     [0.,0.],
@@ -40,10 +41,10 @@ while(True):
     # 计算误差
     y=label
     hypo_x:np.ndarray = a[4]
-    regular_rate=0.003
+    regular_rate=0.001
     # 误差计算公式
     loss=(-1./y.shape[1])*((y*np.log(hypo_x)+(1-y)*np.log(1-hypo_x)).flatten().sum()) + (regular_rate/(2*y.shape[0]))*sum([param.flatten().sum() for param in params])
-
+    print(loss)
 
     # 反向传播
     errors=list(range(layer_count))
@@ -57,12 +58,13 @@ while(True):
 
     # 计算梯度
     for i in range(len(gradients)):
-        gradients[i]=(1.0/y.shape[1])*np.dot(errors[i],a[i].T)+regular_rate*params[i][:,:-1]
+        gradients[i]=(1.0/y.shape[1])*np.dot(errors[i],layer[i].T)+regular_rate*params[i]
+
 
     # 更新参数
     learning_rate=0.002
     for i in range(len(params)):
-        params[i][:,:-1]=params[i][:,:-1]-learning_rate*gradients[i]
+        params[i]=params[i]-learning_rate*gradients[i]
 
     
 
