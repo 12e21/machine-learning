@@ -39,9 +39,12 @@ deltas=[np.zeros([neural_count_of_layers[i+1],neural_count_of_layers[i]]) for i 
 bias_deltas=[np.zeros([i,1]) for i in neural_count_of_layers[1:]]
 
 # 误差
+# loss[0]为误差累计项,loss[1]为实际误差
 loss=[0,0]
-learning_rate=0.3
-
+# 学习率
+learning_rate = 0.3
+# 正则率
+regular_rate = 0.00000001
 
 # 设置激活函数(sigmoid函数)
 def sigmoid(x:np.ndarray):
@@ -86,7 +89,7 @@ def cal_all(current_feature:np.ndarray,current_label:np.ndarray):
 # 梯度下降
 def gradient_decrease():
     for i in range(layer_count-1):
-        weights[i]-=(1./feature.shape[1])*learning_rate*deltas[i]
+        weights[i]-=((1./feature.shape[1])*learning_rate*deltas[i]+regular_rate*weights[i])
         bias_weights[i]-=(1./feature.shape[1])*learning_rate*bias_deltas[i]
     
     global thetas
@@ -100,7 +103,8 @@ def one_iterate():
         #print(str(i)+":"+str(activate_item[-1]))
     gradient_decrease()
 
-    print(loss[0]*(-1./feature.shape[1]))
+    loss[1]=loss[0]*(-1./feature.shape[1])+(regular_rate/(2.*feature.shape[1]))*sum([(w**2).flatten().sum() for w in weights])
+    print(loss[1])
     loss[0]=0
     # 权重梯度项
     global deltas
