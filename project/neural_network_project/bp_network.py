@@ -94,18 +94,28 @@ class BpNetwork:
         self.thetas=[np.concatenate((self.weights[i],self.bias_weights[i]),1) for i in range(self.layer_count-1)]
 
 
-    # 一次完整迭代
-    def one_iterate(self):
-        # 对每组数据前向传播和反向传播
+
+    def one_iterate(self,if_gradient_drease:bool=True):
+        '''
+        one whole iterate,return loss
+        '''
         for i in range(self.label.shape[1]):
             self.cal_all(self.feature[:,i].reshape([self.feature[:,i].size,1]),self.label[:,i].reshape([self.label[:,i].size,1]))
-            #print(str(i)+":"+str(activate_item[-1]))
-        self.gradient_decrease()
+        if if_gradient_drease:
+            self.gradient_decrease()
 
         self.loss[1]=self.loss[0]*(-1./self.feature.shape[1])+(self.regular_rate/(2.*self.feature.shape[1]))*sum([(w**2).flatten().sum() for w in self.weights])
         self.loss[0]=0
         self.deltas=[np.zeros([self.neural_count_of_layers[i+1],self.neural_count_of_layers[i]]) for i in range(self.layer_count-1)]
         self.bias_deltas=[np.zeros([i,1]) for i in self.neural_count_of_layers[1:]]
+
+
+    def train(self,iterateCount:int,ifShowLoss:bool=True):
+        for i in range(iterateCount):
+            self.one_iterate()
+            if ifShowLoss==True :
+                print(self.loss[1])
+
 
 if __name__ == "__main__":
 
@@ -118,6 +128,4 @@ if __name__ == "__main__":
     [1,1,1,1,0,0,1,0]
     ]),4,[3,4,3,2])
 
-    for i in range(10000000000000):
-        net1.one_iterate()
-        print(net1.loss[1])
+    net1.train(10000)
