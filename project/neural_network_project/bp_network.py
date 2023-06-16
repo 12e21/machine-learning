@@ -22,6 +22,7 @@ class BpNetwork:
         self.epsilons=[np.zeros([i,1]) for i in neural_count_of_layers[1:]]
         self.deltas=[np.zeros([neural_count_of_layers[i+1],neural_count_of_layers[i]]) for i in range(layer_count-1)]
         self.bias_deltas=[np.zeros([i,1]) for i in neural_count_of_layers[1:]]
+        self.predict_result=np.zeros(self.label.shape)
 
         self.loss=[0,0]
         self.learning_rate = 0.3
@@ -101,6 +102,7 @@ class BpNetwork:
         '''
         for i in range(self.label.shape[1]):
             self.cal_all(self.feature[:,i].reshape([self.feature[:,i].size,1]),self.label[:,i].reshape([self.label[:,i].size,1]))
+            self.predict_result[:,i]=self.activate_item[-1].flatten()
         if if_gradient_drease:
             self.gradient_decrease()
 
@@ -128,4 +130,5 @@ if __name__ == "__main__":
     [1,1,1,1,0,0,1,0]
     ]),4,[3,4,3,2])
 
-    net1.train(10000)
+    net1.train(1000)
+    print(net1.predict_result)
