@@ -100,6 +100,8 @@ class BpNetwork:
         '''
         one whole iterate,return loss
         '''
+        #TODO RESIZE THE PREDICT
+        
         for i in range(self.label.shape[1]):
             self.cal_all(self.feature[:,i].reshape([self.feature[:,i].size,1]),self.label[:,i].reshape([self.label[:,i].size,1]))
             self.predict_result[:,i]=self.activate_item[-1].flatten()
