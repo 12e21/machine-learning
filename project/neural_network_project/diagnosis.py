@@ -56,9 +56,10 @@ class NetworkDiagnosis():
         return self.network.loss[1]
 
 
-    def drawCurve(self):
+    def drawCurve(self,sepirate:int):
         '''
-        @draw the learning diagnosis curve
+        draw the learning diagnosis curve(iterate part may be need to change to be convergence)
+        @ sepirate: sepirate between batch count used in drawing curve
         '''
         self.splitDataSet()
 
@@ -70,18 +71,22 @@ class NetworkDiagnosis():
 
 
         
-        for i in range(10,trainFeatureCopy.shape[0],5):
-             self.trainSetFeature=trainFeatureCopy[:i,:]
-             self.trainSetLabel=trainLabelCopy[:i,:]
+        for i in range(10,trainFeatureCopy.shape[0],sepirate):
+            self.trainSetFeature=trainFeatureCopy[:i,:]
+            self.trainSetLabel=trainLabelCopy[:i,:]
 
-             trainLossList.append(self.train(iterateCount=1000))
-             crossOverLossList.append(self.validate())
-             print(str(i)+"/"+str(trainFeatureCopy.shape[0]))
+            self.network.reinitWeight()
+
+            trainLossList.append(self.train(iterateCount=1000))
+            crossOverLossList.append(self.validate())
+            print(str(i)+"/"+str(trainFeatureCopy.shape[0]))
 
         self.data_feature=trainFeatureCopy
         self.data_label=trainLabelCopy
         plt.figure()
-        plt.plot(range(10,trainFeatureCopy.shape[0],5),trainLossList,range(10,trainFeatureCopy.shape[0],5),crossOverLossList)
+        plt.plot(range(10,trainFeatureCopy.shape[0],sepirate),trainLossList,label="bias")
+        plt.plot(range(10,trainFeatureCopy.shape[0],sepirate),crossOverLossList,label="variance")
+        plt.legend()
         plt.show()
 
              
@@ -121,6 +126,6 @@ if __name__ == "__main__":
     '''
 
     Diag1=NetworkDiagnosis(data_feature=feature,data_label=label,network=net1)
-    Diag1.drawCurve()
+    Diag1.drawCurve(3)
 
 

@@ -28,6 +28,13 @@ class BpNetwork:
         self.learning_rate = 0.3
         self.regular_rate = 0.00000001
 
+    def reinitWeight(self):
+        '''
+        reinit the weights and theta (used in drawing the diagnosis curve)
+        '''
+        self.weights=[np.random.rand(self.neural_count_of_layers[i+1],self.neural_count_of_layers[i]) for i in range(self.layer_count-1)]
+        self.bias_weights=[np.random.rand(i,1) for i in self.neural_count_of_layers[1:]]
+        self.thetas=[np.concatenate((self.weights[i],self.bias_weights[i]),1) for i in range(self.layer_count-1)]
 
     def sigmoid(self,x:np.ndarray):
         '''
