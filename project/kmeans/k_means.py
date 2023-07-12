@@ -25,8 +25,9 @@ for k in range(1000):
         elif assigns[m]==2:
             plt.scatter(data[m, 0], data[m, 1], c="y")
 
-    plt.clf()
+
     plt.show()
+    plt.clf()
 
     # cluster assign
     for i in range(data.shape[0]):
