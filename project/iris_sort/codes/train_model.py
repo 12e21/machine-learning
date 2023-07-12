@@ -1,10 +1,12 @@
 import numpy as np
 from machine_learn import utils
 from machine_learn import learn
+from machine_learn.utils import ensure_path_sep
 
 # 获取数据
-feature=np.loadtxt("project/iris_sort/data/feature.txt")
-label=np.loadtxt("project/iris_sort/data/label.txt")
+
+feature=np.loadtxt(ensure_path_sep("../data/feature.txt"))
+label=np.loadtxt(ensure_path_sep("../data/label.txt"))
 
 
 # 将每个特征扩展到3次
@@ -49,8 +51,9 @@ params_2=sub_model2.get_params()
 params_3=sub_model3.get_params()
 
 # 储存参数
-np.savetxt("project/iris_sort/data/model/params_1.txt",params_1)
-np.savetxt("project/iris_sort/data/model/params_2.txt",params_2)
-np.savetxt("project/iris_sort/data/model/params_3.txt",params_3)
+
+np.savetxt(ensure_path_sep("../data/model/params_1.txt"),params_1)
+np.savetxt(ensure_path_sep("../data/model/params_2.txt"),params_2)
+np.savetxt(ensure_path_sep("../data/model/params_3.txt"),params_3)
 
 print("all finished !")

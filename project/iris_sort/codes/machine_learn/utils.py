@@ -1,5 +1,5 @@
 import numpy as np
-
+import os
 '''
 本文件存放一些工具函数
 '''
@@ -7,6 +7,17 @@ import numpy as np
 '''
 标准化一个正则向量
 '''
+
+'''
+保持windows和linux上的路径兼容
+'''
+def ensure_path_sep(path:str) -> str:
+    if "/" in path:
+        path = os.sep.join(path.split("/"))
+    if "\\\\" in path:
+        path = os.sep.join(path.split("\\\\"))
+    return path
+
 def standardize_vector(x:np.ndarray)->np.ndarray:
     mean=np.mean(x)
     std=np.std(x)

@@ -1,13 +1,15 @@
 import numpy as np
 from machine_learn import utils
 from machine_learn import learn
+from machine_learn.utils import ensure_path_sep
 
 # 获取数据
-feature=np.loadtxt("project/iris_sort/data/feature.txt")
 
-params_1=np.loadtxt("project/iris_sort/data/model/params_1.txt")
-params_2=np.loadtxt("project/iris_sort/data/model/params_2.txt")
-params_3=np.loadtxt("project/iris_sort/data/model/params_3.txt")
+feature=np.loadtxt(ensure_path_sep("../data/feature.txt"))
+
+params_1=np.loadtxt(ensure_path_sep("../data/model/params_1.txt"))
+params_2=np.loadtxt(ensure_path_sep("../data/model/params_2.txt"))
+params_3=np.loadtxt(ensure_path_sep("../data/model/params_3.txt"))
 
 label=np.ones(feature.shape[0])
 

@@ -1,8 +1,18 @@
 import numpy as np
-
+import os
 '''
 本文件存放一些工具函数
 '''
+
+'''
+保持windows和linux上的路径兼容
+'''
+def ensure_path_sep(path:str) -> str:
+    if "/" in path:
+        path = os.sep.join(path.split("/"))
+    if "\\\\" in path:
+        path = os.sep.join(path.split("\\\\"))
+    return path
 
 '''
 标准化一个正则向量
@@ -54,6 +64,7 @@ def reflect_to_high_dim(x:np.ndarray,column_index:int,high_dim_num:int)->np.ndar
 
 
 if __name__ == "__main__":
+    '''
     # test_arr=np.array([1234,5673,8765])
     # print(standardize_vector(test_arr))
     # print(normalize_vector(test_arr))
@@ -66,3 +77,8 @@ if __name__ == "__main__":
     # print(test_matrix)
     print(normalize_matrix(test_matrix))
     print(standardize_matrix(test_matrix))
+    '''
+
+print(ensure_path_sep("project/iris_sort/data/Iris.csv"))
+print(ensure_path_sep("\\data"))
+print(ensure_path_sep('/data'))

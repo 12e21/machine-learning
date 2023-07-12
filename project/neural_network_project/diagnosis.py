@@ -1,6 +1,7 @@
 from bp_network import * 
 from machine_learn import utils
 import matplotlib.pyplot as plt
+from machine_learn.utils import ensure_path_sep
 
 class NetworkDiagnosis():
     def __init__(self,data_feature:np.ndarray,data_label:np.ndarray,network:BpNetwork) -> None:
@@ -50,8 +51,9 @@ class NetworkDiagnosis():
         self.network.feature=self.testSetFeature.transpose()
         self.network.label=self.testSetLabel.transpose()
         self.network.one_iterate(if_gradient_drease=False)
-        np.savetxt("project/neural_network_project/test/label.txt",self.network.label.transpose())
-        np.savetxt("project/neural_network_project/test/predict.txt",self.network.predict_result.transpose())
+
+        np.savetxt(ensure_path_sep("./test/label.txt"),self.network.label.transpose())
+        np.savetxt(ensure_path_sep("./test/predict.txt"),self.network.predict_result.transpose())
         #print("test loss: "+str(self.network.loss[1]))
         return self.network.loss[1]
 
@@ -101,12 +103,14 @@ class NetworkDiagnosis():
 if __name__ == "__main__":
 
     # load data
-    feature=np.loadtxt("project/iris_sort/data/feature.txt")
-    label=np.loadtxt("project/iris_sort/data/label.txt")
+
+    feature=np.loadtxt(ensure_path_sep("../iris_sort/data/feature.txt"))
+
+    label=np.loadtxt(ensure_path_sep("../iris_sort/data/label.txt"))
     
     # normalize the data, this part is especilly important , if not,the loss could be decreasing very slowly
     feature=utils.normalize_matrix(feature)
-    net1=BpNetwork(feature.transpose(),label.transpose(),3,[5,10,3])
+    net1=BpNetwork(feature.transpose(),label.transpose(),3,tuple([5,10,3]))
     net1.learning_rate=0.3
     net1.regular_rate=0.0
 
