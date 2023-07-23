@@ -80,9 +80,11 @@ if __name__ == "__main__":
         # 画出图像
         plt.scatter(x[:,1],y)
         plt.plot(x[:,1],hypothetical(theta,x),color='red')
-        plt.pause(0.01)
+        plt.savefig('F:\code\zhihu_blog\machine_learning\pic'+"\\"+str(iter_counter)+".jpg")
+        plt.show()
         plt.clf()
-        
+
+        iter_counter+=1
         # 打印误差
         print(loss)
     

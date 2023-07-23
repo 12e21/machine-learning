@@ -36,7 +36,7 @@ numpy提供了多种操作数组的方法，例如索引，切片，变形，合
 - `arr.transpose()`：转置数组，返回一个新的数组。
 - `np.concatenate((arr1, arr2), axis)`：沿着指定轴合并两个或多个数组，返回一个新的数组。
 - `np.split(arr, indices_or_sections, axis)`：沿着指定轴分割一个数组，返回一个列表。
-
+-  注意 `matrix[0,:]`的切片是一个tuple,而`matrix[0:1,:]的切片是矩阵`
 ## 计算数据
 
 numpy提供了多种计算数组的函数，例如数学运算，统计运算，线性代数运算等。常用的函数有：

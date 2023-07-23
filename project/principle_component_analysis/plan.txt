@@ -1,0 +1,3 @@
+这个项目是为了实现和侧式principle component analysis 算法，
+我找了一个葡萄酒品质的数据集（一共有11个特征），PCA算法将在上面运行
+首先我会进行数据预处理（进行数据预处理，提取特征转成numpy格式,进行normalize和feature_scaling）
